@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Ping machine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <style>
+      body {
+        padding-top: 40px;
+      }
+      [v-cloak] { display: none };
+    </style>
+  </head>
+  <body>
+    <section class="section">
+
+
+    <div id="app" class="container" v-cloak>
+
+      <h1 class="title">{{ message }}</h1>
+
+      <div class="columns">
+        <form class="column is-two-third" @submit.prevent="ping">
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field">
+                <label for="address" class="label">Address</label>
+                <div class="control" v-bind:class="{'is-loading': isLoading}">
+                  <input type="string" id="address" name="address" class="input" v-model="address">
+                </div>
+              </div>
+              <div class="field">
+                <label for="count" class="label">Count</label>
+                <div class="control select">
+                  <select name="count" v-model="count">
+                    <option>2</option>
+                    <option>4</option>
+                    <option>8</option>
+                    <option>16</option>
+                    <option>32</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="control">
+            <button class="button is-primary">Ping!</button>
+          </div>
+        </form>
+      </div>
+
+      <ul>
+        <li v-for="ping in pings">
+          <span class="icon" v-bind:class="getColorClass(ping)" >
+            <i class="fa" v-bind:class="getIcon(ping)"></i>
+          </span>
+          Ping to {{ ping.IP }} is {{ping.response}} in {{ ping.time }}us
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="./app.js"></script>
+
+    </section>
+  </body>
+</html>
+
