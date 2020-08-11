@@ -13,7 +13,7 @@ var app = new Vue({
     ping: function() {
       this.isLoading = true;
       this.pings = [];
-      axios.get("https://dev.lucas.ovh/ping/"+ this.count + "/times/"+ this.address)
+      axios.get("/ping/"+ this.count + "/times/"+ this.address)
         .then(this.onSuccess)
         .catch(error => {
           this.isLoading = false;

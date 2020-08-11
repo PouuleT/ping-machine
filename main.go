@@ -31,7 +31,7 @@ func main() {
 
 	n := negroni.Classic()
 	// Serve static files
-	n.Use(negroni.NewStatic(http.Dir("public")))
+	n.Use(negroni.NewStatic(http.Dir("/public")))
 	// Compress responses
 	router := httprouter.New()
 	router.GET("/ping/:times/times/:addr", HandlePing)
